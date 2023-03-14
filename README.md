@@ -153,24 +153,6 @@ e2e tests use the `@vendure/testing` package. For details of how the setup works
 
 When **debugging e2e tests**, set an environment variable `E2E_DEBUG=true` which will increase the global Jest timeout and allow you to step through the e2e tests without the tests automatically failing due to timeout.
 
-### Release Process
-
-All packages in this repo are released at every version change (using [Lerna's fixed mode](https://github.com/lerna/lerna#fixedlocked-mode-default)). This simplifies both the development (tracking multiple disparate versions is tough) and also the developer experience for users of the framework (it is simple to see that all packages are up-to-date and compatible).
-
-To make a release:
-
-##### 1. `yarn publish-release`
-
-It will run `lerna publish` which will prompt for which version to update to. Although we are using [conventional commits](https://www.conventionalcommits.org), the version is not automatically being calculated from the commit messages. Therefore the next version should be manually selected. 
-
-Next it will build all packages to ensure the distributed files are up to date.
-
-Finally the command will create changelog entries for this release.
-
-##### 2. `git push origin master --follow-tags`
-
-The reason we do not rely on Lerna to push the release to Git is that this repo has a lengthy pre-push hook which runs all tests and builds the admin ui. This long wait then invalidates the npm OTP and the publish will fail. So the solution is to publish first and then push.
-
 ## License
 
 MIT
